@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Инструменты Staleks",
+    "description": "Оригинальный инструмент Сталекс для профессионалов.",
+    "category": "Инструменты",
+    "image": "https://cdn4.telesco.pe/file/pIH1hCYe0JoFyX4Zlzfb7kx-cGWafMc3MQFFIaCl2W2ScAgyND4A9lSasgSbClHy5K24-hRgMbKHR0jMSYiXWBRQ2VzRgm3qjId_nocAx3b63BPJQve1mujHcrMHTOGy-5AMcTY-NVsePih-389v-M9qUccWO-DCfOomy3EXOb5BDYQvKSrg1lYBs7U7jJZQYVs2XFXx6TtQaFt69P2dxXA1yLiS_BowmImEqND783u8vNEh6gNxikw5Em8HY42dsgjr-zwCIYu31rLNWKuqxn5VxbXjyFMIxS_zAvaqmkWQs-TbiLvvWXPw_sfYfz8OsbagEE1ZufcvpRk4XVBG3A.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Гель Sakyra",
+    "description": "Гель средней вязкости с поталью и нежными блёстками.",
+    "category": "Гели",
+    "image": "https://cdn4.telesco.pe/file/E8LUPddClUOII1CobBuSgldJvZkZ2p-o0rihzaZ74Q6BWGDKX4Wb4e8iXtWcV4r9xINFr8yTHIAWavLYfk9wEXRRTdsQh77pVwWaVsUoNleZ7nqp9CnJPvzqUv69-wPIHpRuDKLKYYy89GYpEL63uL356mvlac7LKCbk6Jkh7YuZk5L4vtpjkCEymkTjq1OaYnvHE2Rgx_hvKt40G9Gr-xxKRKIFAzw4LXJ42R3FVB5jmZmayj4AjTCT280fCaalE1kH2VIWwwYJ300Vko_0RPu-B4gEzKZQl-o-uHAYuqP5m28cOg_7yOxnuYYAxEtwAggCYsL-_4SAE_JhpZYWNQ.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Avrora Gel Polish",
+    "description": "Эффект втирки с зеркальным блеском.",
+    "category": "Гели",
+    "image": "https://cdn4.telesco.pe/file/erjqiMec0F3WoZj3y4uRKDk_JXQ6bEqONfl_aHkNjhGBVMVsIaRRkcQWMKn8r7ZBsHuqAS83sGM33Jjpn5VZGe7QevDPeqmw5sM1m7wXZzR0P2UqUyPvRJEQWQr_Vz_GEEo14MHtpR7tSGal89-1pQBbnibHdUs1YdiT4kFwlakCHjRpirrv5yL-LcOnErNufVXqluZZrcaUwXOL9ioDgZuRN_OSfdGY3V1ORjwUAkYPmqruLPC43sLGd7o8G4KLM1toGFlcjC2Ok2Hl-s7cdqGN11YDccoDB6z9D8IBfMBJhoSm22in_a4Dk-hGtHtLFf4Cq_evrB5a95Yc2dkkQw.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Pandora Cat Eye",
+    "description": "Магнитный гель-лак Кошачий глаз с глубоким переливом.",
+    "category": "Гели",
+    "image": ""
+  },
+  {
+    "id": 5,
+    "name": "Наклейки для ногтей",
+    "description": "Большой ассортимент стильных дизайнов для маникюра.",
+    "category": "Декор",
+    "image": ""
+  },
+  {
+    "id": 6,
+    "name": "Аксессуары со стразами",
+    "description": "Расчёски, термосы и контейнеры для мусора со стразами.",
+    "category": "Аксессуары",
+    "image": ""
+  }
+]
