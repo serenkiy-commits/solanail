@@ -1,256 +1,235 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SoLaNail | Haute Couture Nails</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SoLaNail | Professional Beauty Market</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Plus+Jakarta+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;700;900&family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --brand-bg: #FAF9F6;
-            --brand-accent: #C48B9F;
-            --brand-dark: #1A1A1A;
-        }
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--brand-bg);
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Manrope', sans-serif; 
+            background-color: #0a0a0a; 
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-accent { font-family: 'Unbounded', sans-serif; }
         
-        /* Modern Glass */
-        .glass-nav {
-            background: rgba(250, 249, 246, 0.8);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        .mesh-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, hsla(330,100%,15%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(280,100%,15%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 100%, hsla(340,100%,10%,1) 0, transparent 50%);
+            background-color: #050505;
         }
 
-        /* Mobile Bottom Tab Bar (Apple Style) */
-        .bottom-tabs {
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2rem;
+        }
+
+        .iphone-tab-bar {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Bento Grid */
-        .bento-item {
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .bento-item:active { transform: scale(0.98); }
-
         [x-cloak] { display: none !important; }
         
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .active-cat {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        
+        .product-image-container img {
+            transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
     </style>
 </head>
-<body x-data="shopData()" class="text-brand-dark antialiased">
+<body x-data="shopData()" class="antialiased">
 
-    <!-- Desktop Sidebar / Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-black/5 md:px-12 px-6">
-        <div class="max-w-7xl mx-auto h-20 flex justify-between items-center">
-            <div class="text-2xl font-light tracking-[0.3em] uppercase transition-all hover:tracking-[0.4em] cursor-pointer">
-                SoLa<span class="font-bold">Nail</span>
-            </div>
-            
-            <nav class="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">
-                <a href="#catalog" class="hover:text-black transition-colors">Catalog</a>
-                <a href="#wholesale" class="hover:text-black transition-colors">Wholesale</a>
-                <a href="#about" class="hover:text-black transition-colors">Story</a>
-            </nav>
+    <div class="mesh-gradient"></div>
 
-            <div class="flex items-center space-x-6">
-                <button @click="cartOpen = true" class="relative group">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                    <span x-show="cartCount > 0" x-text="cartCount" class="absolute -top-2 -right-2 bg-black text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full"></span>
-                </button>
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 px-6 py-6 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-card px-8 py-4">
+            <div class="text-xl font-black font-accent tracking-tighter uppercase text-white">
+                SoLa<span class="text-pink-500">Nail</span>
             </div>
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-widest text-gray-400">
+                <a href="#catalog" class="hover:text-white transition">Каталог</a>
+                <a href="#about" class="hover:text-white transition">О нас</a>
+                <a href="#wholesale" class="hover:text-white transition">ОПТ</a>
+            </div>
+            <button @click="cartOpen = true" class="relative group p-2">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white">
+                    <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span x-show="cartCount > 0" x-text="cartCount" class="absolute -top-1 -right-1 bg-pink-500 text-white text-[9px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-black"></span>
+            </button>
         </div>
     </header>
 
-    <!-- Hero: Minimalist Immersive -->
-    <section class="relative min-h-[90vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-pink-100/50 rounded-full blur-[120px] animate-float"></div>
-            <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-50/30 rounded-full blur-[100px]"></div>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
+            Est. 2026 • Professional Quality
         </div>
-
-        <div class="container mx-auto max-w-5xl relative z-10 text-center">
-            <h2 class="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-8 block animate-pulse">Est. 2026</h2>
-            <h1 class="text-5xl md:text-8xl font-serif italic font-light leading-[1.1] mb-12 tracking-tight">
-                Beauty is <br>
-                <span class="font-sans not-italic font-bold tracking-tighter">Pure Expression.</span>
-            </h1>
-            <p class="text-sm md:text-lg text-gray-400 max-w-lg mx-auto mb-12 leading-relaxed font-light">
-                Professional-grade essentials for creators who demand perfection. Tested by masters, loved by nails.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="#catalog" class="w-full sm:w-auto bg-black text-white px-12 py-5 rounded-full text-[10px] uppercase tracking-widest font-bold hover:scale-105 transition-transform">
-                    Explore Shop
-                </a>
-                <a href="#wholesale" class="w-full sm:w-auto border border-black/10 px-12 py-5 rounded-full text-[10px] uppercase tracking-widest font-bold hover:bg-white transition-colors">
-                    Partnership
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories: Bento Style -->
-    <section id="catalog" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div class="max-w-md">
-                <h3 class="text-3xl font-serif italic mb-4">The Collection</h3>
-                <p class="text-xs text-gray-400 uppercase tracking-widest leading-loose">Curated materials for every technique and style.</p>
-            </div>
-            <div class="flex space-x-2 overflow-x-auto pb-4 scrollbar-hide w-full md:w-auto">
-                <template x-for="cat in categories">
-                    <button 
-                        @click="filter = cat"
-                        class="px-8 py-3 rounded-full text-[9px] uppercase tracking-widest font-bold transition-all whitespace-nowrap"
-                        :class="filter === cat ? 'bg-black text-white' : 'bg-white text-gray-400 border border-black/5 hover:border-black/20'"
-                        x-text="cat"
-                    ></button>
-                </template>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <template x-for="product in filteredProducts" :key="product.id">
-                <div class="bento-item group relative bg-white rounded-[2rem] p-4 border border-black/5 hover:shadow-2xl transition-all duration-700">
-                    <div class="aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-gray-50 relative mb-6">
-                        <img :src="product.image" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="absolute top-6 left-6">
-                            <span class="glass-nav px-4 py-2 rounded-full text-[8px] font-bold uppercase tracking-widest" x-text="product.category"></span>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <h4 class="text-xl font-bold mb-2 tracking-tight" x-text="product.name"></h4>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-8 h-10 line-clamp-2 font-light" x-text="product.description"></p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[9px] uppercase tracking-[0.2em] font-black text-gray-300">By Inquiry</span>
-                            <button 
-                                @click="addToCart(product)"
-                                class="bg-black text-white px-6 py-3 rounded-full text-[9px] uppercase tracking-widest font-bold hover:bg-gray-800 transition shadow-lg active:scale-90"
-                            >
-                                Add to bag
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </div>
-    </section>
-
-    <!-- Mobile Navigation (App-like) -->
-    <div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-[60]">
-        <nav class="glass-nav rounded-3xl border border-black/5 shadow-2xl flex justify-around items-center p-4 bottom-tabs">
-            <a href="#" class="p-2 text-black"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg></a>
-            <a href="#catalog" class="p-2 text-gray-400"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></a>
-            <button @click="cartOpen = true" class="relative p-2 text-gray-400">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <span x-show="cartCount > 0" class="absolute top-1 right-1 bg-black w-2 h-2 rounded-full border border-white"></span>
-            </button>
-        </nav>
-    </div>
-
-    <!-- Cart (App-style) -->
-    <div x-show="cartOpen" x-cloak class="fixed inset-0 z-[100] flex justify-end">
-        <div x-show="cartOpen" x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="absolute inset-0 bg-black/20 backdrop-blur-sm" @click="cartOpen = false"></div>
-        <div x-show="cartOpen" x-transition:enter="transition transform duration-500" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" class="relative w-full max-w-md bg-[#FAF9F6] shadow-2xl h-full flex flex-col md:rounded-l-[3rem]">
-            <div class="p-10 border-b border-black/5 flex justify-between items-center">
-                <h2 class="text-3xl font-serif italic tracking-tight">Bag</h2>
-                <button @click="cartOpen = false" class="text-gray-400 hover:text-black transition">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-            </div>
-
-            <div class="flex-1 overflow-y-auto p-10 scrollbar-hide">
-                <template x-if="cart.length === 0">
-                    <div class="h-full flex flex-col items-center justify-center text-gray-300">
-                        <p class="uppercase tracking-widest text-[10px] font-bold">Your bag is empty</p>
-                    </div>
-                </template>
-                <template x-for="(item, index) in cart" :key="index">
-                    <div class="flex items-center space-x-6 mb-10 group">
-                        <div class="w-24 h-24 rounded-2xl overflow-hidden bg-white border border-black/5 p-1">
-                            <img :src="item.image" class="w-full h-full object-cover rounded-xl">
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-sm tracking-tight" x-text="item.name"></h4>
-                            <p class="text-[8px] uppercase tracking-widest text-gray-400 mt-1" x-text="item.category"></p>
-                        </div>
-                        <button @click="removeFromCart(index)" class="text-gray-300 hover:text-black transition">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
-                        </button>
-                    </div>
-                </template>
-            </div>
-
-            <div class="p-10 bg-white md:rounded-tl-[4rem] shadow-[0_-20px_50px_rgba(0,0,0,0.02)]" x-show="cart.length > 0">
-                <div class="space-y-6 mb-10">
-                    <div>
-                        <label class="text-[8px] uppercase tracking-[0.3em] font-black text-gray-300 block mb-2 px-4">Full Name</label>
-                        <input type="text" x-model="orderForm.name" class="w-full bg-[#FAF9F6] border-none rounded-2xl p-5 text-sm focus:ring-1 focus:ring-black">
-                    </div>
-                    <div>
-                        <label class="text-[8px] uppercase tracking-[0.3em] font-black text-gray-300 block mb-2 px-4">Contact (Phone)</label>
-                        <input type="text" x-model="orderForm.phone" class="w-full bg-[#FAF9F6] border-none rounded-2xl p-5 text-sm focus:ring-1 focus:ring-black">
-                    </div>
-                </div>
-                <button 
-                    @click="sendOrder()"
-                    class="w-full bg-black text-white py-6 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold shadow-xl active:scale-95 transition-all disabled:opacity-50"
-                    :disabled="submitting"
-                >
-                    <span x-show="!submitting">Submit to Personal Stylist</span>
-                    <span x-show="submitting" class="animate-pulse">Processing...</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Wholesale Section -->
-    <section id="wholesale" class="bg-brand-dark text-white py-32 rounded-t-[4rem] px-6">
-        <div class="container mx-auto text-center max-w-2xl">
-            <h3 class="text-4xl md:text-6xl font-serif italic mb-12">B2B Opportunities</h3>
-            <p class="text-gray-400 text-sm leading-loose mb-16 font-light">
-                Empower your studio with SoLaNail. Bulk pricing, exclusive СТМ collections, and priority support for professional partners worldwide.
-            </p>
-            <a href="https://t.me/Solanail23" class="inline-block glass-nav text-black px-16 py-6 rounded-full text-[10px] uppercase tracking-widest font-bold hover:bg-white transition-all">
-                Partner with us
+        <h1 class="text-5xl md:text-8xl font-black font-accent leading-none tracking-tighter mb-8 text-white">
+            CHROME <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 italic">ETERNITY</span>
+        </h1>
+        <p class="max-w-lg text-gray-400 text-sm md:text-lg font-medium leading-relaxed mb-12">
+            Революционные материалы для нейл-арта. Мы создаем стандарты, которым следуют остальные.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a href="#catalog" class="bg-white text-black px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-pink-500 hover:text-white transition-all duration-300">
+                Купить сейчас
+            </a>
+            <a href="#wholesale" class="glass-card border-white/10 px-12 py-5 text-white font-bold text-xs uppercase tracking-widest hover:border-pink-500/50 transition">
+                Стать партнером
             </a>
         </div>
     </section>
 
+    <!-- Catalog -->
+    <section id="catalog" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-black font-accent tracking-tighter text-white mb-4 italic">KOLLEKTION</h2>
+                    <div class="h-1 w-20 bg-pink-500"></div>
+                </div>
+                <div class="flex space-x-2 overflow-x-auto pb-4 no-scrollbar w-full md:w-auto">
+                    <template x-for="cat in categories">
+                        <button 
+                            @click="filter = cat"
+                            class="px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-white/5 whitespace-nowrap"
+                            :class="filter === cat ? 'active-cat' : 'bg-white/5 text-gray-500 hover:text-white'"
+                            x-text="cat"
+                        ></button>
+                    </template>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div class="product-card glass-card p-4 group">
+                        <div class="product-image-container aspect-[4/5] bg-neutral-900 shadow-2xl">
+                            <img :src="product.image" class="w-full h-full object-cover opacity-90 group-hover:opacity-100" 
+                                 onerror="this.src='https://images.unsplash.com/photo-1604654894610-df4906687103?q=80&w=800&auto=format&fit=crop'">
+                            <div class="absolute top-6 left-6">
+                                <span class="bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-lg text-[8px] font-black uppercase tracking-[0.2em] text-pink-500 border border-pink-500/20" x-text="product.category"></span>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-8">
+                            <h3 class="text-xl font-extrabold mb-3 text-white tracking-tight" x-text="product.name"></h3>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-8 h-8 overflow-hidden" x-text="product.description"></p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-black text-gray-400 uppercase tracking-widest">In Stock</span>
+                                <button @click="addToCart(product)" class="bg-pink-600 text-white p-4 rounded-2xl hover:bg-white hover:text-black transition-colors shadow-lg shadow-pink-500/20 active:scale-90">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Drawer -->
+    <div x-show="cartOpen" x-cloak class="fixed inset-0 z-[100] flex justify-end">
+        <div x-show="cartOpen" x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="absolute inset-0 bg-black/80 backdrop-blur-md" @click="cartOpen = false"></div>
+        <div x-show="cartOpen" x-transition:enter="transition transform duration-500 cubic-bezier(0.16, 1, 0.3, 1)" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" class="relative w-full max-w-lg bg-[#0a0a0a] border-l border-white/10 h-full flex flex-col">
+            <div class="p-10 border-b border-white/5 flex justify-between items-center">
+                <h2 class="text-3xl font-black font-accent italic">BAG</h2>
+                <button @click="cartOpen = false" class="text-gray-500 hover:text-white transition">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-10 space-y-10">
+                <template x-if="cart.length === 0">
+                    <div class="h-full flex flex-col items-center justify-center text-gray-700">
+                        <p class="font-accent font-black text-xs uppercase tracking-[0.4em]">Empty Space</p>
+                    </div>
+                </template>
+                <template x-for="(item, index) in cart" :key="index">
+                    <div class="flex items-center space-x-6 animate-fadeIn">
+                        <div class="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 p-1">
+                            <img :src="item.image" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-black text-white text-sm" x-text="item.name"></h4>
+                            <p class="text-[9px] text-pink-500 font-bold uppercase mt-1 tracking-widest" x-text="item.category"></p>
+                        </div>
+                        <button @click="removeFromCart(index)" class="text-gray-600 hover:text-red-500 transition">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </template>
+            </div>
+            <div class="p-10 bg-white/5 border-t border-white/5" x-show="cart.length > 0">
+                <div class="space-y-6 mb-10">
+                    <input type="text" x-model="orderForm.name" placeholder="ВАШЕ ИМЯ" class="w-full bg-black border border-white/10 rounded-xl p-5 text-xs font-black tracking-widest text-white focus:border-pink-500 outline-none uppercase">
+                    <input type="text" x-model="orderForm.phone" placeholder="КОНТАКТНЫЙ ТЕЛЕФОН" class="w-full bg-black border border-white/10 rounded-xl p-5 text-xs font-black tracking-widest text-white focus:border-pink-500 outline-none uppercase">
+                </div>
+                <button @click="sendOrder()" class="w-full bg-white text-black py-6 rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-pink-500 hover:text-white transition-all active:scale-95 disabled:opacity-50" :disabled="submitting">
+                    <span x-show="!submitting">ОФОРМИТЬ В TELEGRAM</span>
+                    <span x-show="submitting" class="animate-pulse">ОТПРАВКА...</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-8 left-1/2 -translate-x-1/2 w-[85%] z-[60]">
+        <nav class="iphone-tab-bar rounded-[2.5rem] border border-white/10 shadow-2xl flex justify-around items-center p-5">
+            <a href="#" class="p-2 text-white"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg></a>
+            <a href="#catalog" class="p-2 text-gray-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></a>
+            <button @click="cartOpen = true" class="relative p-2 text-gray-500">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                <span x-show="cartCount > 0" class="absolute top-1 right-1 bg-pink-500 w-2.5 h-2.5 rounded-full border-2 border-black"></span>
+            </button>
+        </nav>
+    </div>
+
     <script>
         function shopData() {
             return {
-                filter: 'All',
-                categories: ['All', 'Gels', 'Tools', 'Decor', 'Accessories'],
+                filter: 'Все',
+                categories: ['Все', 'Гели', 'Инструменты', 'Декор', 'Аксессуары'],
                 products: [
-                    {id: 1, name: "Staleks Pro Kit", description: "Surgical-grade steel instruments for elite manicurists.", category: "Tools", image: "https://cdn4.telesco.pe/file/pIH1hCYe0JoFyX4Zlzfb7kx-cGWafMc3MQFFIaCl2W2ScAgyND4A9lSasgSbClHy5K24-hRgMbKHR0jMSYiXWBRQ2VzRgm3qjId_nocAx3b63BPJQve1mujHcrMHTOGy-5AMcTY-NVsePih-389v-M9qUccWO-DCfOomy3EXOb5BDYQvKSrg1lYBs7U7jJZQYVs2XFXx6TtQaFt69P2dxXA1yLiS_BowmImEqND783u8vNEh6gNxikw5Em8HY42dsgjr-zwCIYu31rLNWKuqxn5VxbXjyFMIxS_zAvaqmkWQs-TbiLvvWXPw_sfYfz8OsbagEE1ZufcvpRk4XVBG3A.jpg"},
-                    {id: 2, name: "Sakyra Builder", description: "Self-leveling medium viscosity gel with gold leaf particles.", category: "Gels", image: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=800&auto=format&fit=crop"},
-                    {id: 3, name: "Avrora Chrome", description: "Mirror-finish gel polish for high-impact reflection.", category: "Gels", image: "https://cdn4.telesco.pe/file/erjqiMec0F3WoZj3y4uRKDk_JXQ6bEqONfl_aHkNjhGBVMVsIaRRkcQWMKn8r7ZBsHuqAS83sGM33Jjpn5VZGe7QevDPeqmw5sM1m7wXZzR0P2UqUyPvRJEQWQr_Vz_GEEo14MHtpR7tSGal89-1pQBbnibHdUs1YdiT4kFwlakCHjRpirrv5yL-LcOnErNufVXqluZZrcaUwXOL9ioDgZuRN_OSfdGY3V1ORjwUAkYPmqruLPC43sLGd7o8G4KLM1toGFlcjC2Ok2Hl-s7cdqGN11YDccoDB6z9D8IBfMBJhoSm22in_a4Dk-hGtHtLFf4Cq_evrB5a95Yc2dkkQw.jpg"},
-                    {id: 4, name: "Pandora Cat Eye", description: "Deep magnetic pigment for cosmic galaxy effects.", category: "Gels", image: "https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?q=80&w=800&auto=format&fit=crop"},
-                    {id: 5, name: "Minimalist Sliders", description: "On-trend nail stickers for instant complex designs.", category: "Decor", image: "https://images.unsplash.com/photo-1604654894610-df4906687103?q=80&w=800&auto=format&fit=crop"},
-                    {id: 6, name: "Crystal Collection", description: "Bespoke accessories encrusted with premium crystals.", category: "Accessories", image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=800&auto=format&fit=crop"}
+                    {id: 1, name: "Staleks Expert 10", description: "Инструмент из хирургической стали. Эталон точности.", category: "Инструменты", image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=800&auto=format&fit=crop"},
+                    {id: 2, name: "Sakyra Builder Gel", description: "Гель с золотой поталью. Идеальный блик.", category: "Гели", image: "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?q=80&w=800&auto=format&fit=crop"},
+                    {id: 3, name: "Avrora Chrome Polish", description: "Зеркальный эффект за 30 секунд. Магия на ногтях.", category: "Гели", image: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=800&auto=format&fit=crop"},
+                    {id: 4, name: "Pandora Magic Cat", description: "Глубокий 5D магнитный эффект. Космический дизайн.", category: "Гели", image: "https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?q=80&w=800&auto=format&fit=crop"},
+                    {id: 5, name: "Design Sliders 2026", description: "Ультратонкие наклейки. Не ощутимы на ногте.", category: "Декор", image: "https://images.unsplash.com/photo-1604654894610-df4906687103?q=80&w=800&auto=format&fit=crop"},
+                    {id: 6, name: "Crystal Accessory", description: "Эксклюзивные расчески со стразами ручной работы.", category: "Аксессуары", image: "https://images.unsplash.com/photo-1595425283999-e9d739d7fc4f?q=80&w=800&auto=format&fit=crop"}
                 ],
                 cart: [],
                 cartOpen: false,
                 submitting: false,
                 orderForm: { name: '', phone: '' },
                 get filteredProducts() {
-                    let products = this.filter === 'All' ? this.products : this.products.filter(p => p.category === this.filter);
-                    return products;
+                    return this.filter === 'Все' ? this.products : this.products.filter(p => p.category === this.filter);
                 },
                 get cartCount() { return this.cart.length; },
                 addToCart(product) {
@@ -261,26 +240,17 @@
                     this.cart.splice(index, 1);
                 },
                 async sendOrder() {
-                    if (!this.orderForm.name || !this.orderForm.phone) {
-                        alert('Fields required'); return;
-                    }
+                    if (!this.orderForm.name || !this.orderForm.phone) { alert('ЗАПОЛНИТЕ ДАННЫЕ'); return; }
                     this.submitting = true;
-                    const payload = {
-                        name: this.orderForm.name,
-                        phone: this.orderForm.phone,
-                        items: this.cart.map(i => i.name)
-                    };
                     try {
                         const res = await fetch('https://serenkiy.store/webhook-test/re-leads', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
+                            body: JSON.stringify({ name: this.orderForm.name, phone: this.orderForm.phone, items: this.cart.map(i => i.name) })
                         });
-                        if (res.ok) {
-                            alert('Sent to Stylist');
-                            this.cart = []; this.cartOpen = false;
-                        } else { alert('Error. Try Telegram direct.'); }
-                    } catch (e) { alert('Network issue.'); } finally { this.submitting = false; }
+                        if (res.ok) { alert('ЗАКАЗ ПРИНЯТ'); this.cart = []; this.cartOpen = false; }
+                        else { alert('ОШИБКА ОТПРАВКИ'); }
+                    } catch (e) { alert('ОШИБКА СЕТИ'); } finally { this.submitting = false; }
                 }
             }
         }
